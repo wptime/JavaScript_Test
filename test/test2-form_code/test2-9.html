@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>限制字符串长度（区分中英文）</title>
+</head>
+
+<body>
+    <h2>限制字符串长度（区分中英文）</h2>
+    <input type="text" data-length="5" id="remainingCharacters" data-model='Ch' name="remainingCharacters" />
+    <br/>
+    <script type="text/javascript">
+    	var strLen = (function(){
+    		var trim = function(chars) {
+    			return (chars||"").replace(/^(\s|\u00A0)+|(\s|\u00A0)+$/g,"");
+    		};
+    		return function(_str,_model) {
+    			_str = trim(_str),
+    			_model = _model || "Ch"; //默认是中文
+    			var _strLen = _str.length; //获取字符串长度
+    			if(_strLen === 0) {
+    				return 0;
+    			} else {
+    				var chinese = _str.match(/[\u4e00-\u9fa5]/g);
+    				//判断是什么模式
+    				return _strLen+(chinese&&_model == "Ch"?chinese.length:0);
+    			}
+    		};
+    	})();
+    </script>
+    <script type="text/javascript">
+    window.onload = function() {
+        var remainingCharacters = document.getElementById("remainingCharacters"),
+        clearNonumber = function(tThis) {
+        	var _v = tThis.value,
+        	_vLen = _v.length,
+        	dataLength = tThis.getAttribute("data-length"),
+        	remainingCharacters = tThis.getAttribute("data-remainingCharacters");
+        	var dataModel = tThis.getAttribute("data-model"); //区分中英文后
+        	var subLen = dataLength;	//获取数据长度
+        	if(dataModel == "Ch") {	//判断模式
+        		_vLen = strLen(_v,dataModel);
+        		var vv = _v.match(/[\u4e00-\u9fa5]/g);
+        		subLen = dataLength-(!vv?0:vv.length);
+        	}
+        	if(_vLen>dataLength) tThis.value = _v.substr(0,subLen);
+        };
+        remainingCharacters.onfocus = function() {
+            clearNonumber(this);
+        };
+        remainingCharacters.onkeyup = function() {
+            clearNonumber(this);
+        };
+        remainingCharacters.onblur = function() {
+            clearNonumber(this);
+        };
+    };
+    </script>
+</body>
+
+</html>

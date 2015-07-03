@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>关闭输入法1</title>
+</head>
+<body>
+	<h2>关闭输入法</h2>
+	<input type="text" id='banInputMethodgoogle' value='不支持谷歌浏览器'><br>
+	<script type="text/javascript">
+		function banInputMethod(_elementArr) {
+			var arr = _elementArr;
+			self = this;
+			//判断元素是否为数组，如果不是数组将其变成数组
+			if(!(_elementArr instanceof Array)) {
+				arr = [_elementArr];
+			}
+			for(var i = 0,arrLen = arr.length;i<arrLen;i++) {
+				var arr1= arr[i];
+				arr1.onfocus = function() {
+					this.style.imeMode = 'disabled'; 
+				};
+			}
+		}
+		banInputMethod(getElement("banInputMethodgoogle"));
+		function getElement(eStr) {
+			return document.getElementById(eStr);
+		}
+	</script>
+</body>
+</html>

@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>文本框内容自动滚动</title>
+</head>
+
+<body>
+    <h2>文本框中的文字自动滚动效果</h2>
+    <div id="rollContent" data-rwidth='100' data-rheight='100' class='rollContent'>
+        111111111111 222222222222 333333333333 444444444444 555555555555 666666666666 111111111111 222222222222 333333333333 444444444444 555555555555 666666666666
+    </div>
+    <script type="text/javascript">
+    window.onload = function() {
+        var rollContent = document.getElementById("rollContent"),
+            _div = rollContent.innerHTML,
+            setCss = function(_this, cssOption) {
+                if (!_this || _this.nodeType === 3 || _this.nodeType === 8 || !_this.style) {
+                    return;
+                }
+                for (var cs in cssOption) {
+                    _this.style[cs] = cssOption[cs];
+                }
+                return _this;
+            };
+        rollContent.innerHTML = "<div id='rollContent_roll'>" + _div + "</div>";
+        setCss(rollContent, {
+            "position": "relative",
+            "overflow": "hidden",
+            "wordWrap": "break-word",
+            "wordBreak": "break-all",
+            "width": rollContent.getAttribute("data-rwidth") + "px",
+            "height": rollContent.getAttribute("data-rheight") + "px"
+        });
+        var timeRoll = document.getElementById("rollContent_roll");
+        _h = timeRoll.offsetHeight;
+        timeoutRoll = function() {
+            var _h = timeRoll.offsetHeight,
+                _t = parseInt(timeRoll.style.top, 10);
+                //是否将top设置为0    
+               var _tt = _h/2 > Math.abs(_t) || _t >= 0 ? _t - 1 : 0;
+            setCss(timeRoll, {
+                "top": _tt + "px"
+            });
+            setTimeout(timeoutRoll, 50);
+        };
+
+        if (_h > rollContent.getAttribute("data-rheight")) {
+            timeoutRoll();
+            setCss(timeRoll, {
+                "position": "relative",
+                "top": "0px"
+            });
+        }
+    };
+    </script>
+</body>
+
+</html>

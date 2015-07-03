@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>禁止文本框的记忆功能</title>
+</head>
+<body>
+	<h2>禁止文本框的记忆功能</h2>
+	<form action="">
+		<input type="text" id="banAutocomplete" value="禁止自动完成">
+		<input type="text" id="banAutocomplete2" autocomplete="off"/>
+	</form>
+	<script type="text/javascript">
+		window.onload = function() {
+			document.getElementById("banAutocomplete").getAttribute("autocomplete","off");
+		};
+	</script>
+</body>
+</html>

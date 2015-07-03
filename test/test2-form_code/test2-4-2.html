@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>关闭输入法2</title>
+</head>
+<body>
+	<h2>关闭输入法</h2>
+	<input type="text" id='banInputMethodgoogle' value='不支持谷歌浏览器'><br>
+	<input type="text" banInputMethod='1' id="banInputMethod" value="支持主流浏览器">
+	<script type="text/javascript">
+		var arr = [document.getElementById("banInputMethodgoogle"),document.getElementById("banInputMethod")],
+		self = this;
+		for(var i=0,arrLen=arr.length;i<arrLen;i++) {
+			var arr1 = arr[i];
+			arr1.onfocus = function() {
+				this.style.imeMode='disabled';
+			};
+			var banInputMethod = arr1.getAttribute("banInputMethod");
+			if(banInputMethod) {
+				var clearChinese = function(_this) {
+					var _v = _this.value;
+					_this.value = _v.replace(/[\u4e00-\u9fa5]/g,"");
+				};
+				arr1.onkeyup = function() {
+					clearChinese(this);
+				};
+				arr1.onblur = function() {
+					clearChinese(this);
+				};
+
+			}
+		}
+
+	</script>
+</body>
+</html>
