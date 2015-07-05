@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>从字符串中剔除所有HTML代码</title>
+</head>
+<body>
+	<h2>从字符串中剔除所有HTML代码</h2>
+	<input type="text" id="delHtmlTags" value="剔除所有HTML代码">
+	失去焦点时执行操作
+	<script type="text/javascript">
+		window.onload = function() {
+			var _delHtmlTags = document.getElementById("delHtmlTags"); //获取焦点对象
+			_delHtmlTags.onblur = function() {
+				this.value = this.value.replace(/<[\/\!]*[^<>]*>/ig,"");
+			};
+		};
+	</script>
+</body>
+</html>

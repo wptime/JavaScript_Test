@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>限制复选框最多选择几项</title>
+</head>
+<body>
+	<h2>限制复选框最多选择几项</h2>
+	<input type="checkbox" name="forbidcheckSelects">1 <br/>
+	<input type="checkbox" name="forbidcheckSelects">1 <br/>
+	<input type="checkbox" name="forbidcheckSelects">1 <br/>
+	<input type="checkbox" name="forbidcheckSelects">1 <br/>
+	<p>最多选择3项</p>
+	<script type="text/javascript">
+		window.onload = function() {
+			var _forbidcheckSelects = document.getElementsByName("forbidcheckSelects"),
+			banNums = 3;
+			for(var i in _forbidcheckSelects) {
+				_forbidcheckSelects[i].onclick = function() {
+					var _forbidcheckSelects = document.getElementsByName("forbidcheckSelects"),
+					selectNum = 0;
+					for(var i in _forbidcheckSelects) {
+						if(i=="length") break;
+						if(_forbidcheckSelects[i].checked) {
+							selectNum++;
+						}
+					}
+					if(selectNum>banNums) {
+						this.checked = false;
+					}
+				};
+			}
+		};
+	</script>
+</body>
+</html>
