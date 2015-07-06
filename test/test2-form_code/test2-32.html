@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>动态删除下拉选项</title>
+</head>
+<body>
+	<h2>动态删除下拉选项</h2>
+	<input type="button" value="删除" id="removeOptions" data-target="removeOptions"/>
+	<select name="" id="removeOption">
+		<option value="">请选择</option>
+		<option value="1">原有选项</option>
+		<option value="2">原有选项</option>
+		<option value="3">原有选项</option>
+		<option value="4">原有选项</option>
+		<option value="5">原有选项</option>
+		<option value="6">原有选项</option>
+	</select>
+	<script type="text/javascript">
+		window.onload = function() {
+			var _removeOptions = document.getElementById("removeOptions"),
+			removeOptions = function(target,options) {
+				var ol = options.length,
+				i=0;
+				for(;i<ol;i++) {
+					target.options[i]&&target.options.remove(target.options[i]);
+				}
+			};
+			_removeOptions.onclick = function() {
+				removeOptions(document.getElementById("removeOption"),[1,2]);
+			};
+		};
+	</script>
+</body>
+</html>
