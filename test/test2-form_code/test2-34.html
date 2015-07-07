@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>可输入的下拉框</title>
+</head>
+<body>
+	<h2>可输入的下拉框效果</h2>
+	<select id="inOption" style="position: absolute;width:120px;left12px">
+		<option value="可输入1">可输入1</option>
+		<option value="可输入2">可输入2</option>
+	</select>
+	<input type="text" id="inInput" style="position: absolute;left: 8px;height: 13px;width:100px;border-right: 0px"> <br/>
+	<script type="text/javascript">
+		window.onload = function() {
+			var _inOption = document.getElementById("inOption"),
+			_inInput = document.getElementById("inInput"),
+			addOption = function(target,options) {
+				var _option = null,
+				ol = options.length,
+				i = 0,
+				_v = "",
+				_t = "";
+				for(;i<ol;i++) {
+					_v = options[i].value;
+					_t = options[i].text;
+					_option = document.createElement("OPTION");
+					_option.value = _v;
+					_option.text = _t;
+					target.options.add(_option);
+				}
+			};
+			_inInput.onkeyup = function(){
+				var key = event.keyCode,
+				_v = _inInput.value;
+				if(key == 13) {
+					addOption(_inOption,[
+							{
+								"value":_v,
+								"text":_v
+							}
+						]);
+				}
+			};
+			_inOption.onchange = function() {
+				_inInput.value = this.value;
+			};
+		};	
+	</script>
+</body>
+</html>

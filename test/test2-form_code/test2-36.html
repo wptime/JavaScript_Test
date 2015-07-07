@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>清空所有文本型输入框</title>
+</head>
+<body>
+	<h2>设置表单中所有文本型成员的值为空</h2>
+	<form action="" id="clearFrom">
+		<input id="clearText" type="button" value="清空所有文本"> <br/>
+		<input type="text" value="文本1/"> <br/>
+		<textarea>
+			文本2
+		</textarea>
+	</form>
+	<script type="text/javascript">
+		window.onload = function() {
+			var _clearText = document.getElementById("clearText");
+			_clearText.onclick = function() {
+				var _elements = document.getElementById("clearFrom").elements,
+				_elementsLen = _elements.length;
+				ei = null,
+				i = 0;
+				for(;i<_elementsLen;i++) {
+					_ei = _elements[i];
+					(_ei.type == "text" || _ei.type == "textarea") && (_ei.value = "");
+				}
+			};
+		};
+	</script>
+</body>
+</html>
